@@ -84,7 +84,7 @@ void fun3(){
 	}
 	DuLNode* p=head;
 	if(p->next==NULL){
-		printf("链表为空\0");
+		printf("链表为空\n");
 		return;
 	}
 	while(p->next->next!=NULL){
