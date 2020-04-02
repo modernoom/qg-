@@ -58,42 +58,6 @@ void menu(){
 	printf("\t\t==========================================\n");
 }
 
-int isLegal(ElemType* e){
-	double d=0;
-	char a[500];
-	gets(a);
-	int len=0;
-	while(a[len]!='\0'){
-		len++;
-	}
-	int symbol=1;
-	if(a[0]=='-') symbol=-1;
-	int i=0;
-	if(a[0]=='+'||a[0]=='-'){
-		i++;
-		len--;
-	}
-	if(a[i]=='0'){
-		return 0;
-	}
-	for(;a[i]!='\0';i++){
-		if(a[i]<'0'||a[i]>'9'){
-			return 0;
-		}
-		d+=pow(10,--len)*(a[i]-'0');
-	}
-	long long val=symbol*(long long)d;
-	if(val>32767||val<-32768){
-		return 0;
-	} 
-	*e=(int)val;
-	return 1;
-}
-
-void printLink(ElemType e){
-	printf("%d",e);
-}
-
 void fun1(){
 	if(head!=NULL){
 		printf("链表已经初始化过，请先销毁链表\n");
@@ -130,7 +94,8 @@ void fun3(){
 	}
 	LNode* p=head;
 	if(p->next==NULL){
-		printf("链表为空");
+		printf("链表为空\n");
+		return;
 	}
 	while(p->next->next!=NULL){
 		p=p->next;
@@ -183,3 +148,43 @@ void fun9(){
 void fun0(){
 	DestroyList(&head);
 }
+
+int isLegal(ElemType* e){
+	double d=0;
+	char a[500];
+	gets(a);
+	int len=0;
+	while(a[len]!='\0'){
+		len++;
+	}
+	if(len==0){
+		return 0;
+	}
+	int symbol=1;
+	if(a[0]=='-') symbol=-1;
+	int i=0;
+	if(a[0]=='+'||a[0]=='-'){
+		i++;
+		len--;
+	}
+	if(a[i]=='0'){
+		return 0;
+	}
+	for(;a[i]!='\0';i++){
+		if(a[i]<'0'||a[i]>'9'){
+			return 0;
+		}
+		d+=pow(10,--len)*(a[i]-'0');
+	}
+	long long val=symbol*(long long)d;
+	if(val>32767||val<-32768){
+		return 0;
+	} 
+	*e=(int)val;
+	return 1;
+}
+
+void printLink(ElemType e){
+	printf("%d",e);
+}
+

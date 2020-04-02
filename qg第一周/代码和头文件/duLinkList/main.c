@@ -84,7 +84,8 @@ void fun3(){
 	}
 	DuLNode* p=head;
 	if(p->next==NULL){
-		printf("链表为空");
+		printf("链表为空\0");
+		return;
 	}
 	while(p->next->next!=NULL){
 		p=p->next;
@@ -115,6 +116,9 @@ int isLegal(ElemType* e){
 	int len=0;
 	while(a[len]!='\0'){
 		len++;
+	}
+	if(len==0){
+		return 0;
 	}
 	int symbol=1;
 	if(a[0]=='-') symbol=-1;
