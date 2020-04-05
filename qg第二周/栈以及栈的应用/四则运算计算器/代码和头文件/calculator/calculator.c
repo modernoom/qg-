@@ -60,9 +60,6 @@ void fun1(){
 	int num=0;
 	printf("逆波兰式：");
 	//中缀转逆波兰 
-	if(exp1[0]=='+'||exp1[0]=='-'){
-		i++; //以符号开头 ，压栈时忽略符号 
-	}
 	while(exp1[i]!='\0'||isEmptyLStack(&stack)!=1){
 		//是数字 
 		if(isDigit(exp1[i])){
@@ -133,17 +130,25 @@ void fun1(){
 		}
 		printf("\n");
 	}
-	if(exp1[0]=='-'){
-		exp2[0]*=-1;
-	}
+
 	clearLStack(&stack);
 	//对逆波兰进行计算 
 	printf("运算结果：");
+	
 	int k;
 	ElemType num1,num2,num3;
 	for(k=0;k<j;k++){
 		//是 + - * / 运算符 
 		if(isAMMD(exp2[k])){
+			if(stack.count==1){
+				popLStack(&stack,&num1);
+				if(exp2[k]=='-'){
+					pushLStack(&stack,num1*(-1));
+				}else{
+					pushLStack(&stack,num1);
+				}
+				continue;
+			}
 			popLStack(&stack,&num1);
 			popLStack(&stack,&num2);
 			switch(exp2[k]){
@@ -293,6 +298,7 @@ int isLegalExp(char exp[maxSize] ){
 			}else if(exp[i+1]=='\0'){
 					return 0;
 			}else if(isRight(exp[i+1])==1||isAMMD(exp[i-1])==1||isAMMD(exp[i+1])==1){
+			
 				return 0;
 			}
 			continue;

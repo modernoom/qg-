@@ -70,7 +70,7 @@ Status pushLStack(LinkStack *s,ElemType data){
 //³öÕ»
 Status popLStack(LinkStack *s,ElemType *data){
 	if(s->top==NULL){
-		printf("popÊ§°Ü£¬Õ»Îª¿Õ\n");
+		
 		return ERROR;
 	}
 	*data=s->top->data;
